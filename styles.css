@@ -338,6 +338,8 @@ h3 {
 }
 
 .feature-grid,
+.gallery-grid,
+.video-grid,
 .process-grid,
 .collaborator-grid {
   display: grid;
@@ -374,6 +376,85 @@ h3 {
 
 .feature-card:not(.feature-card-large) {
   grid-column: span 5;
+}
+
+.gallery-grid {
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.gallery-card,
+.video-card {
+  border: 1px solid var(--line);
+  border-radius: 1.6rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+  box-shadow: var(--shadow);
+}
+
+.gallery-card {
+  grid-column: span 4;
+}
+
+.gallery-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.gallery-card figcaption {
+  padding: 1rem 1.1rem 1.2rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.gallery-card-tall {
+  grid-column: span 4;
+}
+
+.gallery-card-wide {
+  grid-column: span 8;
+}
+
+.gallery-card-wide img {
+  aspect-ratio: 16 / 10;
+}
+
+.video-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.video-thumb {
+  position: relative;
+}
+
+.video-thumb img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.play-badge {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.5rem;
+  padding: 0.6rem 0.95rem;
+  border-radius: 999px;
+  color: #09090f;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f4e0b6, #d8b36b 60%, #b18b47);
+}
+
+.video-copy {
+  padding: 1.35rem 1.35rem 1.5rem;
+}
+
+.video-copy p:last-child {
+  margin-bottom: 0;
 }
 
 .process-grid {
@@ -438,18 +519,23 @@ h3 {
   .about-grid,
   .section-heading,
   .contact-card,
+  .video-grid,
   .process-grid,
   .collaborator-grid,
   .hero-metrics {
     grid-template-columns: 1fr;
   }
 
-  .feature-grid {
+  .feature-grid,
+  .gallery-grid {
     grid-template-columns: 1fr;
   }
 
   .feature-card-large,
-  .feature-card:not(.feature-card-large) {
+  .feature-card:not(.feature-card-large),
+  .gallery-card,
+  .gallery-card-wide,
+  .gallery-card-tall {
     grid-column: auto;
   }
 
@@ -487,7 +573,9 @@ h3 {
   }
 
   .quote-block p,
-  .contact-card {
+  .contact-card,
+  .video-copy,
+  .gallery-card figcaption {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }
