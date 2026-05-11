@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="VA monogram">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4e0b6" />
+      <stop offset="50%" stop-color="#d8b36b" />
+      <stop offset="100%" stop-color="#8ac7ff" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#09090f" />
+  <circle cx="32" cy="32" r="25" fill="none" stroke="url(#g)" stroke-width="2.5" opacity="0.9" />
+  <path d="M17 45 26 18h3l9 27h-4l-2.2-6.9h-9.4L20.9 45Zm6.5-10h7.1L27 23.7Z" fill="url(#g)" />
+  <path d="M38.2 18h4.2l5.6 18.9L53.5 18H58l-8.6 27h-2.9Z" fill="#f7f3ea" />
+</svg>
