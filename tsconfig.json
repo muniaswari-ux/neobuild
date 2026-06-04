@@ -1,0 +1,1 @@
+{"compilerOptions":{"noUnusedLocals":false,"noUnusedParameters":false,"skipLibCheck":true,"allowJs":true,"baseUrl":".","jsx":"react-jsx","noEmit":true,"target":"ESNext","module":"ESNext","moduleResolution":"bundler","strict":true,"paths":{"@/*":["src/*"]},"types":["react","react-dom"]},"include":["src"],"references":[{"path":"./tsconfig.node.json"}]}
