@@ -3,15 +3,49 @@ This file is maintained automatically after preview builds, SQL apply, and edge 
 Fix agents read it for recent failures — do not delete unless you want to reset history.
 - Project: `6a23a032d861ca8dceb5e33a`
 - User: `68dbd90253f1373e534219eb`
-- Version: `v1`
-- Prompt: `6a23a1aad861ca8dceb5e72a`
-- Updated: 2026-06-06T04:33:19.399Z
-## Recent events (newest first)1. **Preview build (v0)** — `success` — 2026-06-06T04:17:06.363Z — Preview build succeeded
+- Version: `v4`
+- Prompt: `6a23a817d861ca8dceb5f04e`
+- Updated: 2026-06-06T05:42:48.070Z
+## Recent events (newest first)1. **SQL apply (v4)** — `success` — 2026-06-06T05:40:44.729Z — SQL applied successfully.
 
-2. **Preview build (v1)** — `success` — 2026-06-06T04:17:06.363Z — Preview build succeeded
+2. **SQL apply (v4)** — `skipped` — 2026-06-06T05:40:44.729Z — Database script unchanged since last successful apply.
 
-3. **SQL apply (v1)** — `failure` — 2026-06-06T04:17:06.363Z — Failed to run sql query: ERROR:  42P01: relation "profiles" does not exist 
+3. **Preview build (v4)** — `success` — 2026-06-06T05:40:44.729Z — Preview build succeeded
 
-4. **SQL apply (v1)** — `success` — 2026-06-06T04:17:06.363Z — SQL applied successfully.
+4. **Preview build (v0)** — `success` — 2026-06-06T04:17:06.363Z — Preview build succeeded
 
 5. **Preview build (v1)** — `success` — 2026-06-06T04:17:06.363Z — Preview build succeeded
+
+6. **SQL apply (v1)** — `failure` — 2026-06-06T04:17:06.363Z — Failed to run sql query: ERROR:  42P01: relation "profiles" does not exist 
+
+7. **SQL apply (v1)** — `success` — 2026-06-06T04:17:06.363Z — SQL applied successfully.
+
+8. **Preview build (v1)** — `success` — 2026-06-06T04:17:06.363Z — Preview build succeeded
+
+9. **Preview build (v2)** — `success` — 2026-06-06T04:17:06.363Z — Preview build succeeded
+
+10. **SQL apply (v2)** — `failure` — 2026-06-06T04:17:06.363Z — Failed to run sql query: ERROR:  42723: function "handle_new_user" already exists with same argument types 
+
+11. **Preview build (v2)** — `success` — 2026-06-06T04:17:06.363Z — Preview build succeeded
+
+12. **SQL apply (v3)** — `success` — 2026-06-06T04:17:06.363Z — SQL applied successfully.
+
+13. **SQL apply (v3)** — `skipped` — 2026-06-06T04:17:06.363Z — Database script unchanged since last successful apply.
+
+14. **Preview build (v3)** — `success` — 2026-06-06T04:17:06.363Z — Preview build succeeded
+
+15. **SQL apply (v4)** — `success` — 2026-06-06T04:17:06.363Z — SQL applied successfully.
+
+16. **SQL apply (v4)** — `skipped` — 2026-06-06T04:17:06.363Z — Database script unchanged since last successful apply.
+
+17. **Preview build (v4)** — `success` — 2026-06-06T04:17:06.363Z — Preview build succeeded
+
+18. **SQL apply (v4)** — `success` — 2026-06-06T04:17:06.363Z — SQL applied successfully.
+
+19. **SQL apply (v4)** — `failure` — 2026-06-06T04:17:06.363Z — Failed to run sql query: ERROR:  42P01: relation "public.contacts" does not exist 
+
+20. **SQL apply (v4)** — `success` — 2026-06-06T04:17:06.363Z — SQL applied successfully.
+
+21. **Preview build (v4)** — `success` — 2026-06-06T04:17:06.363Z — Preview build succeeded
+
+22. **SQL apply (v4)** — `success` — 2026-06-06T04:17:06.363Z — SQL applied successfully.

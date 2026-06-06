@@ -17,6 +17,9 @@ const Navbar = () => {
           <div className='hidden md:flex space-x-8'>
             <a href='/#features' className='text-gray-600 hover:text-primary transition-colors'>Features</a>
             <a href='/#pricing' className='text-gray-600 hover:text-primary transition-colors'>Pricing</a>
+            {user && (
+              <Link to='/contacts' className='text-gray-600 hover:text-primary transition-colors'>Contacts</Link>
+            )}
             <a href='#' className='text-gray-600 hover:text-primary transition-colors'>Resources</a>
           </div>
           <div className='flex items-center space-x-4'>
