@@ -1,0 +1,25 @@
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+export type Difficulty = "easy" | "medium" | "hard" | "expert" | "master";
+export type CardCount = 8 | 10 | 12 | 14 | 16 | 18 | 20 | 22 | 24 | 26 | 28 | 30 | 32 | 34 | 36 | 38 | 40 | 42 | 44 | 46 | 48;
+export interface Card { id: number; symbol: string; flipped: boolean; matched: boolean }
+export interface BestResult { score: number; time: number; moves: number }
+export interface CompletionResult { score: number; time: number; moves: number; complete: true }
+export const CARD_COUNTS: CardCount[] = [8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48];
+export const DIFFICULTIES: Difficulty[] = ["easy", "medium", "hard", "expert", "master"];
+const symbols = ["circle", "cloud", "crown", "diamond", "gem", "heart", "leaf", "moon", "music", "star", "sun", "zap", "anchor", "award", "bell", "bike", "book", "coffee", "fish", "gift", "key", "lock", "rocket", "shield", "umbrella", "camera", "globe", "home", "mail", "map", "smile", "sunrise"];
+const settings: Record<Difficulty, { delay: number; limit: number; multiplier: number }> = { easy: { delay: 1100, limit: 0, multiplier: 1 }, medium: { delay: 850, limit: 0, multiplier: 1.2 }, hard: { delay: 650, limit: 0, multiplier: 1.45 }, expert: { delay: 480, limit: 0, multiplier: 1.8 }, master: { delay: 330, limit: 0, multiplier: 2.2 } };
+const shuffle = <T,>(items: T[]) => [...items].sort(() => Math.random() - .5);
+const bestKey = "flipbloom-bests-v2";
+type Bests = Record<string, BestResult>;
+const emptyBest = (): BestResult => ({ score: 0, time: 0, moves: 0 });
+export function useMemoryGame(cardCount: CardCount, difficulty: Difficulty, onComplete?: (result: CompletionResult) => void) {
+  const [cards, setCards] = useState<Card[]>([]); const [selected, setSelected] = useState<number[]>([]); const [moves, setMoves] = useState(0); const [time, setTime] = useState(0); const [score, setScore] = useState(0); const [started, setStarted] = useState(false); const [complete, setComplete] = useState(false); const [bests, setBests] = useState<Bests>({}); const roundRef = useRef(0);
+  const totalPairs = cardCount / 2; const pairs = useMemo(() => cards.filter(card => card.matched).length / 2, [cards]); const modeKey = `${cardCount}-${difficulty}`;
+  const newGame = useCallback(() => { roundRef.current += 1; const pairCount = cardCount / 2; const deck = shuffle([...symbols.slice(0, pairCount), ...symbols.slice(0, pairCount)]).map((symbol, id) => ({ id, symbol, flipped: false, matched: false })); setCards(deck); setSelected([]); setMoves(0); setTime(0); setScore(0); setStarted(false); setComplete(false); }, [cardCount]);
+  useEffect(() => { try { const raw = localStorage.getItem(bestKey); if (raw) setBests(JSON.parse(raw) as Bests); } catch { /* local storage may be unavailable */ } }, []);
+  useEffect(() => { newGame(); }, [newGame]);
+  useEffect(() => { if (!started || complete) return; const timer = window.setInterval(() => setTime(value => value + 1), 1000); return () => window.clearInterval(timer); }, [started, complete]);
+  const chooseCard = useCallback((id: number) => { const card = cards.find(item => item.id === id); if (!card || complete || selected.length >= 2 || card.matched || card.flipped) return; const next = [...selected, id]; setStarted(true); setSelected(next); setCards(current => current.map(item => item.id === id ? { ...item, flipped: true } : item)); if (next.length === 2) { setMoves(value => value + 1); const picked = cards.filter(item => next.includes(item.id)); const match = picked[0]?.symbol === picked[1]?.symbol; const round = roundRef.current; window.setTimeout(() => { if (round !== roundRef.current) return; setCards(current => current.map(item => next.includes(item.id) ? (match ? { ...item, matched: true, flipped: true } : { ...item, flipped: false }) : item)); setSelected([]); if (match) setScore(value => value + Math.round((700 + Math.max(0, 300 - time * 4)) * settings[difficulty].multiplier)); }, settings[difficulty].delay); } }, [cards, complete, difficulty, selected, time]);
+useEffect(() => { if (cards.length && pairs === totalPairs && !complete) { const finalScore = score + Math.round((700 + Math.max(0, 300 - time * 4)) * settings[difficulty].multiplier); setScore(finalScore); setComplete(true); setStarted(false); setBests(current => { const old = current[modeKey] || emptyBest(); const updated = finalScore > old.score ? { ...current, [modeKey]: { score: finalScore, time, moves } } : current; localStorage.setItem(bestKey, JSON.stringify(updated)); return updated; }); onComplete?.({ score: finalScore, time, moves, complete: true }); } }, [cards.length, complete, difficulty, modeKey, moves, onComplete, pairs, score, time, totalPairs]);
+  return { cards, pairs, totalPairs, moves, time, score, complete, best: bests[modeKey] || emptyBest(), chooseCard, newGame, moveLimit: settings[difficulty].limit };
+}

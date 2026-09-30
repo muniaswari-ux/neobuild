@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #f9f7ff; background: #100d20; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; background: radial-gradient(circle at 15% 5%, rgba(137,103,246,.18), transparent 34rem), radial-gradient(circle at 88% 82%, rgba(69,211,174,.1), transparent 30rem), #100d20; }
+button { font: inherit; }
+button:focus-visible { outline: 3px solid #c9b8ff; outline-offset: 3px; }
+.card-perspective { perspective: 1100px; }
+.card-inner { transform-style: preserve-3d; transition: transform .5s cubic-bezier(.2,.75,.25,1); }
+.card-inner.is-flipped { transform: rotateY(180deg); }
+.card-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.card-front { background: linear-gradient(135deg, var(--card-start), var(--card-end)); border-color: color-mix(in srgb, var(--card-start), white 25%); }
+.card-back { transform: rotateY(180deg); }
+.card-back-unmatched { background: color-mix(in srgb, var(--card-start), #100d20 72%); border-color: color-mix(in srgb, var(--card-start), white 22%); }
+.card-icon { color: color-mix(in srgb, var(--card-start), white 62%); }
+.card-color-violet { --card-start: #8b5cf6; --card-end: #4c1d95; }
+.card-color-blue { --card-start: #3b82f6; --card-end: #1e3a8a; }
+.card-color-cyan { --card-start: #06b6d4; --card-end: #155e75; }
+.card-color-teal { --card-start: #14b8a6; --card-end: #115e59; }
+.card-color-green { --card-start: #22c55e; --card-end: #166534; }
+.card-color-amber { --card-start: #f59e0b; --card-end: #92400e; }
+.card-color-rose { --card-start: #f43f5e; --card-end: #881337; }
+.card-color-pink { --card-start: #ec4899; --card-end: #831843; }
+.game-grid { touch-action: manipulation; }
+/* Shared card-count progression surfaces. These remain readable when the
+   selector grows to all 21 board sizes. */
+.level-group-heading { color: #c9b8ff; letter-spacing: .14em; text-transform: uppercase; }
+/* Keep gradient utility fallbacks available for the shared visual language. */
+.from-lavender-400 { --tw-gradient-from: #aa8cff var(--tw-gradient-from-position); --tw-gradient-to: rgb(170 140 255 / 0) var(--tw-gradient-to-position); }
+.from-amber-300 { --tw-gradient-from: #fcd34d var(--tw-gradient-from-position); --tw-gradient-to: rgb(252 211 77 / 0) var(--tw-gradient-to-position); }
+.level-group { scroll-margin-top: 1rem; }
+.stat-row { scrollbar-width: none; }
+.stat-row::-webkit-scrollbar { display: none; }
+.stat-box { transition: border-color .2s ease, background-color .2s ease, transform .2s ease; }
+.stat-box:hover { border-color: rgba(201,184,255,.28); background-color: rgba(255,255,255,.09); transform: translateY(-1px); }
+.card-matched { background: #fff; border-color: rgba(255,255,255,.9); box-shadow: 0 0 20px rgba(255,255,255,.22), 0 0 34px rgba(196,181,253,.18); }
+.card-is-matched { opacity: .92; }
+.card-is-matched .card-back { background: #fff; border-color: rgba(255,255,255,.9); box-shadow: 0 0 20px rgba(255,255,255,.22), 0 0 34px rgba(196,181,253,.18); }
+.card-is-matched button { pointer-events: none; }
+.card-is-matched .card-back { animation: matchedGlow 1.8s ease-in-out infinite alternate; }
+@keyframes matchedGlow { from { box-shadow: 0 0 14px rgba(255,255,255,.18); } to { box-shadow: 0 0 28px rgba(255,255,255,.5); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+@media (max-width: 520px) { .game-grid { gap: .55rem; } .game-grid.grid-cols-8 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
